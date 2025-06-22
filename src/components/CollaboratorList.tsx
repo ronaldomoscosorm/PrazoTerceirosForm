@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trash2, Users, Download } from 'lucide-react';
+import { Trash2, Users, Download, Check, X } from 'lucide-react';
 import { format } from 'date-fns';
 import { Collaborator } from '@/types/collaborator';
 
@@ -38,6 +38,22 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
       return { variant: 'secondary' as const, text: 'Em dia' };
     }
   };
+
+  const CheckboxStatus = ({ checked }: { checked: boolean }) => (
+    <div className="flex items-center gap-1">
+      {checked ? (
+        <>
+          <Check className="h-4 w-4 text-green-600" />
+          <span className="text-sm text-green-600">Sim</span>
+        </>
+      ) : (
+        <>
+          <X className="h-4 w-4 text-red-600" />
+          <span className="text-sm text-red-600">Não</span>
+        </>
+      )}
+    </div>
+  );
 
   if (collaborators.length === 0) {
     return (
@@ -122,6 +138,37 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
                     </Badge>
                   </div>
                 ))}
+              </div>
+
+              {/* Nova seção para os checkboxes */}
+              <div className="border-t pt-4">
+                <h4 className="text-sm font-semibold mb-3">Documentação Adicional</h4>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">Treinamento</p>
+                    <CheckboxStatus checked={collaborator.treinamento} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">OS</p>
+                    <CheckboxStatus checked={collaborator.os} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">Documentação</p>
+                    <CheckboxStatus checked={collaborator.documentacao} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">APR/PAE</p>
+                    <CheckboxStatus checked={collaborator.aprPae} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">EPI</p>
+                    <CheckboxStatus checked={collaborator.epi} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium">CIPA</p>
+                    <CheckboxStatus checked={collaborator.cipa} />
+                  </div>
+                </div>
               </div>
             </div>
           ))}

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
 import { CalendarIcon, Plus } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
@@ -40,6 +41,14 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
   const [ppr, setPpr] = useState<Date | null>(null);
   const [loto, setLoto] = useState<Date | null>(null);
   const [ptaPlataforma, setPtaPlataforma] = useState<Date | null>(null);
+
+  // Novos estados para os checkboxes
+  const [treinamento, setTreinamento] = useState(false);
+  const [os, setOs] = useState(false);
+  const [documentacao, setDocumentacao] = useState(false);
+  const [aprPae, setAprPae] = useState(false);
+  const [epi, setEpi] = useState(false);
+  const [cipa, setCipa] = useState(false);
 
   const unidades = ['ARD', 'BEL', 'BLM', 'CRR', 'DMU', 'FOR', 'JGS', 'JPA', 'MAO', 'MCZ', 'NAT', 'OCZ', 'PVH', 'RET', 'SLZ', 'SSA', 'SUA', 'THE', 'VAG', 'VDC'];
   const grupos = ['R1', 'R2', 'R3'];
@@ -179,11 +188,17 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
       ppr,
       loto,
       ptaPlataforma,
+      treinamento,
+      os,
+      documentacao,
+      aprPae,
+      epi,
+      cipa,
     };
 
     onAddCollaborator(newCollaborator);
     
-    // Reset form
+    // Reset form - incluindo os novos checkboxes
     setNomeCompleto('');
     setCpf('');
     setUnidade('');
@@ -207,6 +222,12 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     setPpr(null);
     setLoto(null);
     setPtaPlataforma(null);
+    setTreinamento(false);
+    setOs(false);
+    setDocumentacao(false);
+    setAprPae(false);
+    setEpi(false);
+    setCipa(false);
 
     toast({
       title: "Colaborador adicionado",
@@ -496,6 +517,73 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                   onDateChange={setPtaPlataforma}
                   placeholder="Selecionar data"
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* Nova seção para os checkboxes */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Documentação Adicional</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="treinamento"
+                  checked={treinamento}
+                  onCheckedChange={setTreinamento}
+                />
+                <Label htmlFor="treinamento" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  Treinamento
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="os"
+                  checked={os}
+                  onCheckedChange={setOs}
+                />
+                <Label htmlFor="os" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  OS
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="documentacao"
+                  checked={documentacao}
+                  onCheckedChange={setDocumentacao}
+                />
+                <Label htmlFor="documentacao" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  Documentação
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="aprPae"
+                  checked={aprPae}
+                  onCheckedChange={setAprPae}
+                />
+                <Label htmlFor="aprPae" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  APR/PAE
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="epi"
+                  checked={epi}
+                  onCheckedChange={setEpi}
+                />
+                <Label htmlFor="epi" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  EPI
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="cipa"
+                  checked={cipa}
+                  onCheckedChange={setCipa}
+                />
+                <Label htmlFor="cipa" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  CIPA
+                </Label>
               </div>
             </div>
           </div>

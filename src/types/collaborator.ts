@@ -24,4 +24,10 @@ export interface Collaborator {
   ppr: Date | null;
   loto: Date | null;
   ptaPlataforma: Date | null;
+  treinamento: boolean;
+  os: boolean;
+  documentacao: boolean;
+  aprPae: boolean;
+  epi: boolean;
+  cipa: boolean;
 }

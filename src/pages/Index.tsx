@@ -33,12 +33,13 @@ const Index = () => {
       return;
     }
 
-    // Cabeçalho do CSV
-    const csvHeader = "Nome Completo,CPF,Unidade,Grupo,Setor,Gestor,Integração,ASO,NR10,NR10-SEP,NR11,NR12,NR18,NR18 Andaime,NR20,NR33,NR35,NR34,PGRO/PCMAT,PCMSO,PPR,Loto,PTA Plataforma\n";
+    // Cabeçalho do CSV com os novos campos
+    const csvHeader = "Nome Completo,CPF,Unidade,Grupo,Setor,Gestor,Integração,ASO,NR10,NR10-SEP,NR11,NR12,NR18,NR18 Andaime,NR20,NR33,NR35,NR34,PGRO/PCMAT,PCMSO,PPR,Loto,PTA Plataforma,Treinamento,OS,Documentação,APR/PAE,EPI,CIPA\n";
     
-    // Dados dos colaboradores
+    // Dados dos colaboradores com os novos campos
     const csvData = collaborators.map(c => {
       const formatDateForCSV = (date: Date | null) => date ? format(date, 'dd/MM/yyyy') : 'null';
+      const formatBooleanForCSV = (value: boolean) => value ? 'Sim' : 'Não';
       
       return [
         `"${c.nomeCompleto}"`,
@@ -63,7 +64,13 @@ const Index = () => {
         `"${formatDateForCSV(c.pcmso)}"`,
         `"${formatDateForCSV(c.ppr)}"`,
         `"${formatDateForCSV(c.loto)}"`,
-        `"${formatDateForCSV(c.ptaPlataforma)}"`
+        `"${formatDateForCSV(c.ptaPlataforma)}"`,
+        `"${formatBooleanForCSV(c.treinamento)}"`,
+        `"${formatBooleanForCSV(c.os)}"`,
+        `"${formatBooleanForCSV(c.documentacao)}"`,
+        `"${formatBooleanForCSV(c.aprPae)}"`,
+        `"${formatBooleanForCSV(c.epi)}"`,
+        `"${formatBooleanForCSV(c.cipa)}"`
       ].join(',');
     }).join('\n');
 
@@ -102,7 +109,6 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Cards informativos */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <Card className="text-center">
             <CardHeader>
