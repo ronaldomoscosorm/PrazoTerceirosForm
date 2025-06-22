@@ -78,6 +78,42 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
       return false;
     }
 
+    if (!integracao) {
+      toast({
+        title: "Erro de validação",
+        description: "Data de Integração é obrigatória",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (!aso) {
+      toast({
+        title: "Erro de validação",
+        description: "Data do ASO é obrigatória",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (!pgroPcmat) {
+      toast({
+        title: "Erro de validação",
+        description: "Data do PGRO/PCMAT é obrigatória",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (!pcmso) {
+      toast({
+        title: "Erro de validação",
+        description: "Data do PCMSO é obrigatória",
+        variant: "destructive",
+      });
+      return false;
+    }
+
     if (!unidade || !grupo || !setor) {
       toast({
         title: "Erro de validação",
@@ -158,11 +194,13 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
   const DatePicker = ({ 
     date, 
     onDateChange, 
-    placeholder 
+    placeholder,
+    required = false
   }: { 
     date: Date | null; 
     onDateChange: (date: Date | null) => void; 
     placeholder: string;
+    required?: boolean;
   }) => (
     <Popover>
       <PopoverTrigger asChild>
@@ -170,7 +208,8 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
           variant="outline"
           className={cn(
             "w-full justify-start text-left font-normal",
-            !date && "text-muted-foreground"
+            !date && "text-muted-foreground",
+            required && !date && "border-red-500"
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
@@ -296,19 +335,21 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
             <h3 className="text-lg font-semibold">Datas de Vencimento</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="space-y-2">
-                <Label>Integração</Label>
+                <Label>Integração *</Label>
                 <DatePicker
                   date={integracao}
                   onDateChange={setIntegracao}
                   placeholder="Selecionar data"
+                  required
                 />
               </div>
               <div className="space-y-2">
-                <Label>ASO</Label>
+                <Label>ASO *</Label>
                 <DatePicker
                   date={aso}
                   onDateChange={setAso}
                   placeholder="Selecionar data"
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -392,19 +433,21 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                 />
               </div>
               <div className="space-y-2">
-                <Label>PGRO/PCMAT</Label>
+                <Label>PGRO/PCMAT *</Label>
                 <DatePicker
                   date={pgroPcmat}
                   onDateChange={setPgroPcmat}
                   placeholder="Selecionar data"
+                  required
                 />
               </div>
               <div className="space-y-2">
-                <Label>PCMSO</Label>
+                <Label>PCMSO *</Label>
                 <DatePicker
                   date={pcmso}
                   onDateChange={setPcmso}
                   placeholder="Selecionar data"
+                  required
                 />
               </div>
               <div className="space-y-2">

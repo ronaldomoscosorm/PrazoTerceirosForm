@@ -38,7 +38,7 @@ const Index = () => {
     
     // Dados dos colaboradores
     const csvData = collaborators.map(c => {
-      const formatDateForCSV = (date: Date | null) => date ? format(date, 'dd/MM/yyyy') : '';
+      const formatDateForCSV = (date: Date | null) => date ? format(date, 'dd/MM/yyyy') : 'null';
       
       return [
         `"${c.nomeCompleto}"`,
@@ -46,7 +46,7 @@ const Index = () => {
         `"${c.unidade}"`,
         `"${c.grupo}"`,
         `"${c.setor}"`,
-        `"${c.gestor}"`,
+        `"${c.gestor || 'null'}"`,
         `"${formatDateForCSV(c.integracao)}"`,
         `"${formatDateForCSV(c.aso)}"`,
         `"${formatDateForCSV(c.nr10)}"`,
