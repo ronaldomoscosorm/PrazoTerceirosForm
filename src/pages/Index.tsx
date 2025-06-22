@@ -34,15 +34,37 @@ const Index = () => {
     }
 
     // Cabeçalho do CSV
-    const csvHeader = "Nome,CPF,Data ASO,Data NR10,Data NR12\n";
+    const csvHeader = "Nome Completo,CPF,Unidade,Grupo,Setor,Gestor,Integração,ASO,NR10,NR10-SEP,NR11,NR12,NR18,NR18 Andaime,NR20,NR33,NR35,NR34,PGRO/PCMAT,PCMSO,PPR,Loto,PTA Plataforma\n";
     
     // Dados dos colaboradores
     const csvData = collaborators.map(c => {
-      const dataAso = c.dataAso ? format(c.dataAso, 'dd/MM/yyyy') : '';
-      const dataNr10 = c.dataNr10 ? format(c.dataNr10, 'dd/MM/yyyy') : '';
-      const dataNr12 = c.dataNr12 ? format(c.dataNr12, 'dd/MM/yyyy') : '';
+      const formatDateForCSV = (date: Date | null) => date ? format(date, 'dd/MM/yyyy') : '';
       
-      return `"${c.nome}","${c.cpf}","${dataAso}","${dataNr10}","${dataNr12}"`;
+      return [
+        `"${c.nomeCompleto}"`,
+        `"${c.cpf}"`,
+        `"${c.unidade}"`,
+        `"${c.grupo}"`,
+        `"${c.setor}"`,
+        `"${c.gestor}"`,
+        `"${formatDateForCSV(c.integracao)}"`,
+        `"${formatDateForCSV(c.aso)}"`,
+        `"${formatDateForCSV(c.nr10)}"`,
+        `"${formatDateForCSV(c.nr10Sep)}"`,
+        `"${formatDateForCSV(c.nr11)}"`,
+        `"${formatDateForCSV(c.nr12)}"`,
+        `"${formatDateForCSV(c.nr18)}"`,
+        `"${formatDateForCSV(c.nr18Andaime)}"`,
+        `"${formatDateForCSV(c.nr20)}"`,
+        `"${formatDateForCSV(c.nr33)}"`,
+        `"${formatDateForCSV(c.nr35)}"`,
+        `"${formatDateForCSV(c.nr34)}"`,
+        `"${formatDateForCSV(c.pgroPcmat)}"`,
+        `"${formatDateForCSV(c.pcmso)}"`,
+        `"${formatDateForCSV(c.ppr)}"`,
+        `"${formatDateForCSV(c.loto)}"`,
+        `"${formatDateForCSV(c.ptaPlataforma)}"`
+      ].join(',');
     }).join('\n');
 
     const csvContent = csvHeader + csvData;
@@ -97,23 +119,23 @@ const Index = () => {
           <Card className="text-center">
             <CardHeader>
               <Shield className="h-8 w-8 mx-auto text-green-600" />
-              <CardTitle className="text-lg">NR10</CardTitle>
+              <CardTitle className="text-lg">Normas Regulamentadoras</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Segurança em Instalações e Serviços em Eletricidade
+                NR10, NR11, NR12, NR18, NR20, NR33, NR34, NR35
               </p>
             </CardContent>
           </Card>
           
           <Card className="text-center">
             <CardHeader>
-              <Shield className="h-8 w-8 mx-auto text-orange-600" />
-              <CardTitle className="text-lg">NR12</CardTitle>
+              <Calendar className="h-8 w-8 mx-auto text-orange-600" />
+              <CardTitle className="text-lg">Programas</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Segurança no Trabalho em Máquinas e Equipamentos
+                PGRO/PCMAT, PC1MSO, PPR, Loto, PTA
               </p>
             </CardContent>
           </Card>

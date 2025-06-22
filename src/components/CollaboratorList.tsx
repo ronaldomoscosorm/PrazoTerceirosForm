@@ -41,7 +41,7 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
 
   if (collaborators.length === 0) {
     return (
-      <Card className="w-full max-w-4xl mx-auto">
+      <Card className="w-full max-w-6xl mx-auto">
         <CardContent className="flex flex-col items-center justify-center py-12">
           <Users className="h-12 w-12 text-muted-foreground mb-4" />
           <p className="text-muted-foreground text-center">
@@ -55,7 +55,7 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-4">
+    <div className="w-full max-w-6xl mx-auto space-y-4">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center gap-2">
@@ -71,12 +71,18 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
           {collaborators.map((collaborator) => (
             <div
               key={collaborator.id}
-              className="border rounded-lg p-4 space-y-3 hover:bg-accent/50 transition-colors"
+              className="border rounded-lg p-4 space-y-4 hover:bg-accent/50 transition-colors"
             >
               <div className="flex items-start justify-between">
-                <div className="space-y-1">
-                  <h3 className="font-semibold text-lg">{collaborator.nome}</h3>
-                  <p className="text-sm text-muted-foreground">CPF: {collaborator.cpf}</p>
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-lg">{collaborator.nomeCompleto}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-sm text-muted-foreground">
+                    <p>CPF: {collaborator.cpf}</p>
+                    <p>Unidade: {collaborator.unidade}</p>
+                    <p>Grupo: {collaborator.grupo}</p>
+                    <p>Setor: {collaborator.setor}</p>
+                    {collaborator.gestor && <p>Gestor: {collaborator.gestor}</p>}
+                  </div>
                 </div>
                 <Button
                   variant="outline"
@@ -88,30 +94,34 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
                 </Button>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="space-y-1">
-                  <p className="text-sm font-medium">Data da ASO</p>
-                  <p className="text-sm">{formatDate(collaborator.dataAso)}</p>
-                  <Badge variant={getDateStatus(collaborator.dataAso).variant} className="text-xs">
-                    {getDateStatus(collaborator.dataAso).text}
-                  </Badge>
-                </div>
-                
-                <div className="space-y-1">
-                  <p className="text-sm font-medium">Data da NR10</p>
-                  <p className="text-sm">{formatDate(collaborator.dataNr10)}</p>
-                  <Badge variant={getDateStatus(collaborator.dataNr10).variant} className="text-xs">
-                    {getDateStatus(collaborator.dataNr10).text}
-                  </Badge>
-                </div>
-                
-                <div className="space-y-1">
-                  <p className="text-sm font-medium">Data da NR12</p>
-                  <p className="text-sm">{formatDate(collaborator.dataNr12)}</p>
-                  <Badge variant={getDateStatus(collaborator.dataNr12).variant} className="text-xs">
-                    {getDateStatus(collaborator.dataNr12).text}
-                  </Badge>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+                {[
+                  { label: 'Integração', date: collaborator.integracao },
+                  { label: 'ASO', date: collaborator.aso },
+                  { label: 'NR10', date: collaborator.nr10 },
+                  { label: 'NR10-SEP', date: collaborator.nr10Sep },
+                  { label: 'NR11', date: collaborator.nr11 },
+                  { label: 'NR12', date: collaborator.nr12 },
+                  { label: 'NR18', date: collaborator.nr18 },
+                  { label: 'NR18 Andaime', date: collaborator.nr18Andaime },
+                  { label: 'NR20', date: collaborator.nr20 },
+                  { label: 'NR33', date: collaborator.nr33 },
+                  { label: 'NR35', date: collaborator.nr35 },
+                  { label: 'NR34', date: collaborator.nr34 },
+                  { label: 'PGRO/PCMAT', date: collaborator.pgroPcmat },
+                  { label: 'PCMSO', date: collaborator.pcmso },
+                  { label: 'PPR', date: collaborator.ppr },
+                  { label: 'Loto', date: collaborator.loto },
+                  { label: 'PTA Plataforma', date: collaborator.ptaPlataforma },
+                ].map(({ label, date }) => (
+                  <div key={label} className="space-y-1">
+                    <p className="text-sm font-medium">{label}</p>
+                    <p className="text-sm">{formatDate(date)}</p>
+                    <Badge variant={getDateStatus(date).variant} className="text-xs">
+                      {getDateStatus(date).text}
+                    </Badge>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
