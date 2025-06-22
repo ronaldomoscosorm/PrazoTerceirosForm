@@ -2491,10 +2491,12 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     'MD VIDRAÇARIA',
     'FUTURA',
     'JSL'
-  ];
+  ].sort();
 
-  const unidades = ['ARD', 'BEL', 'BLM', 'CRR', 'DMU', 'FOR', 'JGS', 'JPA', 'MAO', 'MCZ', 'NAT', 'OCZ', 'PVH', 'RET', 'SLZ', 'SSA', 'SUA', 'THE', 'VAG', 'VDC'];
-  const grupos = ['R1', 'R2', 'R3'];
+  const unidades = ['ARD', 'BEL', 'BLM', 'CRR', 'DMU', 'FOR', 'JGS', 'JPA', 'MAO', 'MCZ', 'NAT', 'OCZ', 'PVH', 'RET', 'SLZ', 'SSA', 'SUA', 'THE', 'VAG', 'VDC'].sort();
+  
+  const grupos = ['R1', 'R2', 'R3'].sort();
+  
   const setores = [
     'Comercial',
     'CSC',
@@ -2519,7 +2521,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     'REFEITORIO',
     'Residuos',
     'SEGURANCA DO TRABALHO'
-  ];
+  ].sort();
 
   const formatCPF = (value: string) => {
     const numbers = value.replace(/\D/g, '');
