@@ -3,6 +3,7 @@ export interface Collaborator {
   id: string;
   nomeCompleto: string;
   cpf: string;
+  empresa: string;
   unidade: string;
   grupo: string;
   setor: string;

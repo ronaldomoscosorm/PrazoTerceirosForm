@@ -33,10 +33,10 @@ const Index = () => {
       return;
     }
 
-    // Cabeçalho do CSV com os novos campos
-    const csvHeader = "Nome Completo,CPF,Unidade,Grupo,Setor,Gestor,Integração,ASO,NR10,NR10-SEP,NR11,NR12,NR18,NR18 Andaime,NR20,NR33,NR35,NR34,PGRO/PCMAT,PCMSO,PPR,Loto,PTA Plataforma,Treinamento,OS,Documentação,APR/PAE,EPI,CIPA\n";
+    // Cabeçalho do CSV com o campo empresa
+    const csvHeader = "Nome Completo,CPF,Empresa,Unidade,Grupo,Setor,Gestor,Integração,ASO,NR10,NR10-SEP,NR11,NR12,NR18,NR18 Andaime,NR20,NR33,NR35,NR34,PGRO/PCMAT,PCMSO,PPR,Loto,PTA Plataforma,Treinamento,OS,Documentação,APR/PAE,EPI,CIPA\n";
     
-    // Dados dos colaboradores com os novos campos
+    // Dados dos colaboradores com o campo empresa
     const csvData = collaborators.map(c => {
       const formatDateForCSV = (date: Date | null) => date ? format(date, 'dd/MM/yyyy') : 'null';
       const formatBooleanForCSV = (value: boolean) => value ? 'Sim' : 'Não';
@@ -44,6 +44,7 @@ const Index = () => {
       return [
         `"${c.nomeCompleto}"`,
         `"${c.cpf}"`,
+        `"${c.empresa}"`,
         `"${c.unidade}"`,
         `"${c.grupo}"`,
         `"${c.setor}"`,

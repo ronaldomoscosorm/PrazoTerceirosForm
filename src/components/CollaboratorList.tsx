@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -92,8 +91,9 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
               <div className="flex items-start justify-between">
                 <div className="space-y-2">
                   <h3 className="font-semibold text-lg">{collaborator.nomeCompleto}</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 text-sm text-muted-foreground">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 text-sm text-muted-foreground">
                     <p>CPF: {collaborator.cpf}</p>
+                    <p>Empresa: {collaborator.empresa}</p>
                     <p>Unidade: {collaborator.unidade}</p>
                     <p>Grupo: {collaborator.grupo}</p>
                     <p>Setor: {collaborator.setor}</p>

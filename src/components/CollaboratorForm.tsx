@@ -20,6 +20,7 @@ interface CollaboratorFormProps {
 const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }) => {
   const [nomeCompleto, setNomeCompleto] = useState('');
   const [cpf, setCpf] = useState('');
+  const [empresa, setEmpresa] = useState('');
   const [unidade, setUnidade] = useState('');
   const [grupo, setGrupo] = useState('');
   const [setor, setSetor] = useState('');
@@ -49,6 +50,16 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
   const [aprPae, setAprPae] = useState(false);
   const [epi, setEpi] = useState(false);
   const [cipa, setCipa] = useState(false);
+
+  const empresas = [
+    'ALGAR TELECOM S.A.',
+    'ALGAR TECH',
+    'ALGAR SOLUCOES',
+    'ALGAR AGRO',
+    'ALGAR VENTURES',
+    'UNA UNIVERSIDADE',
+    'ALGAR MULTIMIDIA'
+  ];
 
   const unidades = ['ARD', 'BEL', 'BLM', 'CRR', 'DMU', 'FOR', 'JGS', 'JPA', 'MAO', 'MCZ', 'NAT', 'OCZ', 'PVH', 'RET', 'SLZ', 'SSA', 'SUA', 'THE', 'VAG', 'VDC'];
   const grupos = ['R1', 'R2', 'R3'];
@@ -146,10 +157,10 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
       return false;
     }
 
-    if (!unidade || !grupo || !setor) {
+    if (!empresa || !unidade || !grupo || !setor) {
       toast({
         title: "Erro de validação",
-        description: "Unidade, Grupo e Setor devem ser preenchidos.",
+        description: "Empresa, Unidade, Grupo e Setor devem ser preenchidos.",
         variant: "destructive",
       });
       return false;
@@ -167,6 +178,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
       id: Date.now().toString(),
       nomeCompleto: nomeCompleto.trim(),
       cpf: cpf.trim(),
+      empresa,
       unidade,
       grupo,
       setor,
@@ -201,6 +213,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     // Reset form - incluindo os novos checkboxes
     setNomeCompleto('');
     setCpf('');
+    setEmpresa('');
     setUnidade('');
     setGrupo('');
     setSetor('');
@@ -316,6 +329,21 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Dados Organizacionais</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="space-y-2">
+                <Label>Empresa *</Label>
+                <Select value={empresa} onValueChange={setEmpresa}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecionar empresa" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {empresas.map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="space-y-2">
                 <Label>Unidade *</Label>
                 <Select value={unidade} onValueChange={setUnidade}>
