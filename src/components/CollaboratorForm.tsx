@@ -41,9 +41,33 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
   const [loto, setLoto] = useState<Date | null>(null);
   const [ptaPlataforma, setPtaPlataforma] = useState<Date | null>(null);
 
-  const unidades = ['JGS', 'SUA', 'ARD', 'FOR', 'SSA', 'NAT', 'MCZ', 'SLZ', 'OCZ', 'THE', 'JPA', 'CRR', 'VAG', 'DMU', 'VDC', 'BLM', 'MAO', 'RET', 'BEL', 'PVH'];
-  const grupos = ['Grupo 1', 'Grupo 2', 'Grupo 3', 'Grupo 4'];
-  const setores = ['Setor Administrativo', 'Setor Operacional', 'Setor Técnico', 'Setor Comercial'];
+  const unidades = ['ARD', 'BEL', 'BLM', 'CRR', 'DMU', 'FOR', 'JGS', 'JPA', 'MAO', 'MCZ', 'NAT', 'OCZ', 'PVH', 'RET', 'SLZ', 'SSA', 'SUA', 'THE', 'VAG', 'VDC'];
+  const grupos = ['R1', 'R2', 'R3'];
+  const setores = [
+    'Comercial',
+    'CSC',
+    'DISTRIBUICAO',
+    'EQS / GDM',
+    'ESTOQUE / ALMOXARIFADO',
+    'EXPEDICAO',
+    'FROTA',
+    'INFRAESTRUTURA',
+    'LIMPEZA E JARDINAGEM',
+    'LOGISTICA',
+    'MAN. AUTOS',
+    'MANUTENCAO INDUSTRIAL',
+    'MANUTENCAO PREDIAL',
+    'MARKETING',
+    'MEIO AMBIENTE',
+    'PORTARIA E SEG. PATRIMONIAL',
+    'PRINT IN HOUSE',
+    'PRODUCAO',
+    'QUALIDADE',
+    'RECICLAGEM',
+    'REFEITORIO',
+    'Residuos',
+    'SEGURANCA DO TRABALHO'
+  ];
 
   const formatCPF = (value: string) => {
     const numbers = value.replace(/\D/g, '');
