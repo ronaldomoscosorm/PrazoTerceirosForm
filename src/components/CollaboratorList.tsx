@@ -3,21 +3,20 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trash2, Users, Mail } from 'lucide-react';
+import { Trash2, Users, Download } from 'lucide-react';
 import { format } from 'date-fns';
 import { Collaborator } from '@/types/collaborator';
-import { toast } from '@/hooks/use-toast';
 
 interface CollaboratorListProps {
   collaborators: Collaborator[];
   onRemoveCollaborator: (id: string) => void;
-  onSendEmail: () => void;
+  onDownloadCSV: () => void;
 }
 
 const CollaboratorList: React.FC<CollaboratorListProps> = ({ 
   collaborators, 
   onRemoveCollaborator, 
-  onSendEmail 
+  onDownloadCSV 
 }) => {
   const formatDate = (date: Date | null) => {
     if (!date) return 'Não informado';
@@ -63,9 +62,9 @@ const CollaboratorList: React.FC<CollaboratorListProps> = ({
             <Users className="h-5 w-5" />
             Colaboradores Cadastrados ({collaborators.length})
           </CardTitle>
-          <Button onClick={onSendEmail} className="flex items-center gap-2">
-            <Mail className="h-4 w-4" />
-            Enviar por Email
+          <Button onClick={onDownloadCSV} className="flex items-center gap-2">
+            <Download className="h-4 w-4" />
+            Baixar CSV
           </Button>
         </CardHeader>
         <CardContent className="space-y-4">

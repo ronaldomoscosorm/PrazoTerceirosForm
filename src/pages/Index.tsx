@@ -23,42 +23,47 @@ const Index = () => {
     });
   };
 
-  const handleSendEmail = () => {
+  const handleDownloadCSV = () => {
     if (collaborators.length === 0) {
       toast({
         title: "Erro",
-        description: "Adicione pelo menos um colaborador antes de enviar por email.",
+        description: "Adicione pelo menos um colaborador antes de baixar o CSV.",
         variant: "destructive",
       });
       return;
     }
 
-    // Preparar dados para JSON
-    const jsonData = {
-      timestamp: new Date().toISOString(),
-      totalColaboradores: collaborators.length,
-      colaboradores: collaborators.map(c => ({
-        nome: c.nome,
-        cpf: c.cpf,
-        dataAso: c.dataAso ? format(c.dataAso, 'yyyy-MM-dd') : null,
-        dataNr10: c.dataNr10 ? format(c.dataNr10, 'yyyy-MM-dd') : null,
-        dataNr12: c.dataNr12 ? format(c.dataNr12, 'yyyy-MM-dd') : null,
-      }))
-    };
+    // Cabeçalho do CSV
+    const csvHeader = "Nome,CPF,Data ASO,Data NR10,Data NR12\n";
+    
+    // Dados dos colaboradores
+    const csvData = collaborators.map(c => {
+      const dataAso = c.dataAso ? format(c.dataAso, 'dd/MM/yyyy') : '';
+      const dataNr10 = c.dataNr10 ? format(c.dataNr10, 'dd/MM/yyyy') : '';
+      const dataNr12 = c.dataNr12 ? format(c.dataNr12, 'dd/MM/yyyy') : '';
+      
+      return `"${c.nome}","${c.cpf}","${dataAso}","${dataNr10}","${dataNr12}"`;
+    }).join('\n');
 
-    // Simular envio por email (aqui você integraria com um serviço real)
-    const emailBody = `Dados dos Colaboradores Terceirizados:\n\n${JSON.stringify(jsonData, null, 2)}`;
-    const subject = `Dados de Vencimento - Colaboradores Terceirizados - ${format(new Date(), 'dd/MM/yyyy')}`;
+    const csvContent = csvHeader + csvData;
     
-    // Criar link mailto
-    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    // Criar blob e link para download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
     
-    // Abrir cliente de email
-    window.location.href = mailtoLink;
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `colaboradores_${format(new Date(), 'dd-MM-yyyy')}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
     
     toast({
-      title: "Email preparado",
-      description: "O cliente de email será aberto com os dados em formato JSON.",
+      title: "CSV baixado",
+      description: "O arquivo CSV foi baixado com sucesso!",
     });
   };
 
@@ -121,7 +126,7 @@ const Index = () => {
         <CollaboratorList
           collaborators={collaborators}
           onRemoveCollaborator={handleRemoveCollaborator}
-          onSendEmail={handleSendEmail}
+          onDownloadCSV={handleDownloadCSV}
         />
       </div>
     </div>
