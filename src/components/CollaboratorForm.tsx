@@ -41,7 +41,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
   const [loto, setLoto] = useState<Date | null>(null);
   const [ptaPlataforma, setPtaPlataforma] = useState<Date | null>(null);
 
-  const unidades = ['Unidade A', 'Unidade B', 'Unidade C', 'Unidade D'];
+  const unidades = ['JGS', 'SUA', 'ARD', 'FOR', 'SSA', 'NAT', 'MCZ', 'SLZ', 'OCZ', 'THE', 'JPA', 'CRR', 'VAG', 'DMU', 'VDC', 'BLM', 'MAO', 'RET', 'BEL', 'PVH'];
   const grupos = ['Grupo 1', 'Grupo 2', 'Grupo 3', 'Grupo 4'];
   const setores = ['Setor Administrativo', 'Setor Operacional', 'Setor Técnico', 'Setor Comercial'];
 
