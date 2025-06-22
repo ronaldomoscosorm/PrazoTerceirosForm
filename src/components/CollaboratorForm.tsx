@@ -529,7 +529,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                 <Checkbox
                   id="treinamento"
                   checked={treinamento}
-                  onCheckedChange={setTreinamento}
+                  onCheckedChange={(checked) => setTreinamento(checked === true)}
                 />
                 <Label htmlFor="treinamento" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   Treinamento
@@ -539,7 +539,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                 <Checkbox
                   id="os"
                   checked={os}
-                  onCheckedChange={setOs}
+                  onCheckedChange={(checked) => setOs(checked === true)}
                 />
                 <Label htmlFor="os" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   OS
@@ -549,7 +549,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                 <Checkbox
                   id="documentacao"
                   checked={documentacao}
-                  onCheckedChange={setDocumentacao}
+                  onCheckedChange={(checked) => setDocumentacao(checked === true)}
                 />
                 <Label htmlFor="documentacao" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   Documentação
@@ -559,7 +559,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                 <Checkbox
                   id="aprPae"
                   checked={aprPae}
-                  onCheckedChange={setAprPae}
+                  onCheckedChange={(checked) => setAprPae(checked === true)}
                 />
                 <Label htmlFor="aprPae" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   APR/PAE
@@ -569,7 +569,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                 <Checkbox
                   id="epi"
                   checked={epi}
-                  onCheckedChange={setEpi}
+                  onCheckedChange={(checked) => setEpi(checked === true)}
                 />
                 <Label htmlFor="epi" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   EPI
@@ -579,7 +579,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                 <Checkbox
                   id="cipa"
                   checked={cipa}
-                  onCheckedChange={setCipa}
+                  onCheckedChange={(checked) => setCipa(checked === true)}
                 />
                 <Label htmlFor="cipa" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   CIPA
