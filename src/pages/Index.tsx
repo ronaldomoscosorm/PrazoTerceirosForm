@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 import CollaboratorForm from '@/components/CollaboratorForm';
 import CollaboratorList from '@/components/CollaboratorList';
 import { Collaborator } from '@/types/collaborator';
 import { toast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Calendar, Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { FileText, Calendar, Shield, ExternalLink } from 'lucide-react';
 
 const Index = () => {
   const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
@@ -108,6 +110,16 @@ const Index = () => {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Sistema para cadastramento e controle das datas de vencimento de colaboradores terceirizados
           </p>
+          
+          {/* Link para versão HTML5 */}
+          <div className="mt-4">
+            <Link to="/html5">
+              <Button variant="outline" className="flex items-center gap-2">
+                <ExternalLink className="h-4 w-4" />
+                Acessar Versão HTML5
+              </Button>
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
