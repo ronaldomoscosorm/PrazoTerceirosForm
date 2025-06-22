@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -63,7 +62,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     if (!nomeCompleto.trim()) {
       toast({
         title: "Erro de validação",
-        description: "Nome Completo é obrigatório",
+        description: "Nome Completo deve ser preenchido.",
         variant: "destructive",
       });
       return false;
@@ -72,7 +71,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     if (!cpf.trim() || cpf.replace(/\D/g, '').length !== 11) {
       toast({
         title: "Erro de validação",
-        description: "CPF deve conter 11 dígitos",
+        description: "CPF deve ser preenchido.",
         variant: "destructive",
       });
       return false;
@@ -81,7 +80,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     if (!integracao) {
       toast({
         title: "Erro de validação",
-        description: "Data de Integração é obrigatória",
+        description: "Integração deve ser preenchido.",
         variant: "destructive",
       });
       return false;
@@ -90,7 +89,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     if (!aso) {
       toast({
         title: "Erro de validação",
-        description: "Data do ASO é obrigatória",
+        description: "ASO deve ser preenchido.",
         variant: "destructive",
       });
       return false;
@@ -99,7 +98,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     if (!pgroPcmat) {
       toast({
         title: "Erro de validação",
-        description: "Data do PGRO/PCMAT é obrigatória",
+        description: "PGRO/PCMAT deve ser preenchido.",
         variant: "destructive",
       });
       return false;
@@ -108,7 +107,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     if (!pcmso) {
       toast({
         title: "Erro de validação",
-        description: "Data do PCMSO é obrigatória",
+        description: "PCMSO deve ser preenchido.",
         variant: "destructive",
       });
       return false;
@@ -117,7 +116,7 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     if (!unidade || !grupo || !setor) {
       toast({
         title: "Erro de validação",
-        description: "Unidade, Grupo e Setor são obrigatórios",
+        description: "Unidade, Grupo e Setor devem ser preenchidos.",
         variant: "destructive",
       });
       return false;
