@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
@@ -8,7 +7,7 @@ import { Collaborator } from '@/types/collaborator';
 import { toast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { FileText, Calendar, Shield, ExternalLink } from 'lucide-react';
+import { FileText, Calendar, Shield, ExternalLink, Download } from 'lucide-react';
 
 const Index = () => {
   const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
@@ -99,6 +98,13 @@ const Index = () => {
     });
   };
 
+  const handleDownloadProjectFiles = () => {
+    toast({
+      title: "Download de Arquivos",
+      description: "Para baixar os arquivos do projeto, conecte seu GitHub ou use o Dev Mode no canto superior esquerdo.",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="container mx-auto px-4 space-y-8">
@@ -111,14 +117,22 @@ const Index = () => {
             Sistema para cadastramento e controle das datas de vencimento de colaboradores terceirizados
           </p>
           
-          {/* Link para versão HTML5 */}
-          <div className="mt-4">
+          {/* Links para versões e download */}
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
             <Link to="/html5">
               <Button variant="outline" className="flex items-center gap-2">
                 <ExternalLink className="h-4 w-4" />
                 Acessar Versão HTML5
               </Button>
             </Link>
+            <Button 
+              variant="outline" 
+              onClick={handleDownloadProjectFiles}
+              className="flex items-center gap-2"
+            >
+              <Download className="h-4 w-4" />
+              Baixar Arquivos do Projeto
+            </Button>
           </div>
         </div>
 
