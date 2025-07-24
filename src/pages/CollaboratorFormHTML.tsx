@@ -2491,6 +2491,14 @@ const CollaboratorFormHTML = () => {
     return value;
   };
 
+  const formatCNPJ = (value: string) => {
+    const numbers = value.replace(/\D/g, '');
+    if (numbers.length <= 14) {
+      return numbers.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+    return value;
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -2500,6 +2508,8 @@ const CollaboratorFormHTML = () => {
       nomeCompleto: formData.get('nomeCompleto') as string,
       cpf: formData.get('cpf') as string,
       empresa: formData.get('empresa') as string,
+      cnpj: formData.get('cnpj') as string || '',
+      novaEmpresa: formData.get('novaEmpresa') as string || '',
       unidade: formData.get('unidade') as string,
       grupo: formData.get('grupo') as string,
       setor: formData.get('setor') as string,
@@ -2550,7 +2560,7 @@ const CollaboratorFormHTML = () => {
       return;
     }
 
-    const csvHeader = "Nome Completo,CPF,Empresa,Unidade,Grupo,Setor,Gestor,Integração,ASO,NR10,NR10-SEP,NR11,NR12,NR18,NR18 Andaime,NR20,NR33,NR35,NR34,PGRO/PCMAT,PCMSO,PPR,Loto,PTA Plataforma,Treinamento,OS,Documentação,APR/PAE,EPI,CIPA\n";
+    const csvHeader = "Nome Completo,CPF,Empresa,CNPJ,Nova Empresa,Unidade,Grupo,Setor,Gestor,Integração,ASO,NR10,NR10-SEP,NR11,NR12,NR18,NR18 Andaime,NR20,NR33,NR35,NR34,PGRO/PCMAT,PCMSO,PPR,Loto,PTA Plataforma,Treinamento,OS,Documentação,APR/PAE,EPI,CIPA\n";
     
     const csvData = collaborators.map(c => {
       const formatDateForCSV = (date: Date | null) => date ? format(date, 'dd/MM/yyyy') : 'null';
@@ -2560,6 +2570,8 @@ const CollaboratorFormHTML = () => {
         `"${c.nomeCompleto}"`,
         `"${c.cpf}"`,
         `"${c.empresa}"`,
+        `"${c.cnpj || ''}"`,
+        `"${c.novaEmpresa || ''}"`,
         `"${c.unidade}"`,
         `"${c.grupo}"`,
         `"${c.setor}"`,
@@ -2701,10 +2713,43 @@ const CollaboratorFormHTML = () => {
                           {empresa}
                         </option>
                       ))}
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="unidade" className="text-sm font-medium">Unidade *</label>
+                     </select>
+                   </div>
+                 </div>
+                 
+                 {/* Segunda linha - CNPJ e Nova Empresa */}
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                   <div className="space-y-2">
+                     <label htmlFor="cnpj" className="text-sm font-medium">CNPJ</label>
+                     <input
+                       id="cnpj"
+                       name="cnpj"
+                       type="text"
+                       maxLength={18}
+                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                       placeholder="00.000.000/0000-00"
+                       onInput={(e) => {
+                         const input = e.target as HTMLInputElement;
+                         input.value = formatCNPJ(input.value);
+                       }}
+                     />
+                   </div>
+                   <div className="space-y-2">
+                     <label htmlFor="novaEmpresa" className="text-sm font-medium">Nova Empresa</label>
+                     <input
+                       id="novaEmpresa"
+                       name="novaEmpresa"
+                       type="text"
+                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                       placeholder="Nome da nova empresa"
+                     />
+                   </div>
+                 </div>
+
+                 {/* Terceira linha - Dados organizacionais */}
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                   <div className="space-y-2">
+                     <label htmlFor="unidade" className="text-sm font-medium">Unidade *</label>
                     <select
                       id="unidade"
                       name="unidade"

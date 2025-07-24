@@ -2613,6 +2613,8 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
       nomeCompleto: nomeCompleto.trim(),
       cpf: cpf.trim(),
       empresa,
+      cnpj: '',
+      novaEmpresa: '',
       unidade,
       grupo,
       setor,

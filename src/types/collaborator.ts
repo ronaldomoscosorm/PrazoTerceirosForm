@@ -4,6 +4,8 @@ export interface Collaborator {
   nomeCompleto: string;
   cpf: string;
   empresa: string;
+  cnpj: string;
+  novaEmpresa: string;
   unidade: string;
   grupo: string;
   setor: string;
