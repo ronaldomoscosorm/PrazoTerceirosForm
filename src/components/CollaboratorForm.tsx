@@ -21,6 +21,8 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
   const [nomeCompleto, setNomeCompleto] = useState('');
   const [cpf, setCpf] = useState('');
   const [empresa, setEmpresa] = useState('');
+  const [cnpj, setCnpj] = useState('');
+  const [novaEmpresa, setNovaEmpresa] = useState('');
   const [unidade, setUnidade] = useState('');
   const [grupo, setGrupo] = useState('');
   const [setor, setSetor] = useState('');
@@ -2536,6 +2538,12 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     setCpf(formatted);
   };
 
+  const handleCNPJChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formattedValue = value.replace(/\D/g, '').replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    setCnpj(formattedValue);
+  };
+
   const validateForm = () => {
     if (!nomeCompleto.trim()) {
       toast({
@@ -2613,8 +2621,8 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
       nomeCompleto: nomeCompleto.trim(),
       cpf: cpf.trim(),
       empresa,
-      cnpj: '',
-      novaEmpresa: '',
+      cnpj: cnpj.trim(),
+      novaEmpresa: novaEmpresa.trim(),
       unidade,
       grupo,
       setor,
@@ -2650,6 +2658,8 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
     setNomeCompleto('');
     setCpf('');
     setEmpresa('');
+    setCnpj('');
+    setNovaEmpresa('');
     setUnidade('');
     setGrupo('');
     setSetor('');
@@ -2779,6 +2789,27 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="cnpj">CNPJ</Label>
+                <Input
+                  id="cnpj"
+                  type="text"
+                  value={cnpj}
+                  onChange={handleCNPJChange}
+                  placeholder="00.000.000/0000-00"
+                  maxLength={18}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="novaEmpresa">Nova Empresa</Label>
+                <Input
+                  id="novaEmpresa"
+                  type="text"
+                  value={novaEmpresa}
+                  onChange={(e) => setNovaEmpresa(e.target.value)}
+                  placeholder="Nome da nova empresa"
+                />
               </div>
               <div className="space-y-2">
                 <Label>Unidade *</Label>
