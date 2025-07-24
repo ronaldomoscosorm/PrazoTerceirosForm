@@ -2599,10 +2599,19 @@ const CollaboratorForm: React.FC<CollaboratorFormProps> = ({ onAddCollaborator }
       return false;
     }
 
-    if (!empresa || !unidade || !grupo || !setor) {
+    // Empresa é obrigatória apenas se CNPJ e Nova Empresa não estiverem preenchidos
+    const empresaObrigatoria = !cnpj.trim() && !novaEmpresa.trim();
+    
+    if ((empresaObrigatoria && !empresa) || !unidade || !grupo || !setor) {
+      let missingFields = [];
+      if (empresaObrigatoria && !empresa) missingFields.push("Empresa");
+      if (!unidade) missingFields.push("Unidade");
+      if (!grupo) missingFields.push("Grupo");
+      if (!setor) missingFields.push("Setor");
+      
       toast({
         title: "Erro de validação",
-        description: "Empresa, Unidade, Grupo e Setor devem ser preenchidos.",
+        description: `${missingFields.join(", ")} ${missingFields.length > 1 ? "devem" : "deve"} ser preenchido${missingFields.length > 1 ? "s" : ""}.`,
         variant: "destructive",
       });
       return false;
